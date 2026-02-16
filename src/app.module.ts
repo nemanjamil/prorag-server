@@ -8,6 +8,9 @@ import { DocumentsModule } from './documents/documents.module.js';
 import { EmbeddingModule } from './embedding/embedding.module.js';
 import { QdrantModule } from './qdrant/qdrant.module.js';
 import { Bm25Module } from './bm25/bm25.module.js';
+import { RerankerModule } from './reranker/reranker.module.js';
+import { GenerationModule } from './generation/generation.module.js';
+import { QueryModule } from './query/query.module.js';
 
 @Module({
   imports: [
@@ -22,6 +25,9 @@ import { Bm25Module } from './bm25/bm25.module.js';
     EmbeddingModule,
     QdrantModule,
     Bm25Module,
+    RerankerModule,
+    GenerationModule,
+    QueryModule,
   ],
 })
 export class AppModule {}
