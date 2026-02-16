@@ -11,6 +11,8 @@ import { Bm25Module } from './bm25/bm25.module.js';
 import { RerankerModule } from './reranker/reranker.module.js';
 import { GenerationModule } from './generation/generation.module.js';
 import { QueryModule } from './query/query.module.js';
+import { PromptTemplatesModule } from './prompt-templates/prompt-templates.module.js';
+import { ExperimentsModule } from './experiments/experiments.module.js';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { QueryModule } from './query/query.module.js';
     RerankerModule,
     GenerationModule,
     QueryModule,
+    PromptTemplatesModule,
+    ExperimentsModule,
   ],
 })
 export class AppModule {}

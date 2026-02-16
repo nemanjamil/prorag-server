@@ -435,4 +435,19 @@ export class QueryService implements OnModuleInit {
     }
     return log;
   }
+
+  async executeAndReturn(dto: QueryRequestDto): Promise<QueryLog> {
+    return new Promise((resolve, reject) => {
+      const emitter: SseEmitter = {
+        emit: (event) => {
+          if (event.type === 'done') {
+            this.getQueryLog(event.data.queryLogId).then(resolve, reject);
+          } else if (event.type === 'error') {
+            reject(new Error(event.data.message));
+          }
+        },
+      };
+      this.executeQuery(dto, emitter).catch(reject);
+    });
+  }
 }
