@@ -4,7 +4,7 @@ An educational platform for learning RAG (Retrieval-Augmented Generation) intern
 
 ## Prerequisites
 
-- Node.js 20+
+- Node.js 24+
 - Docker & Docker Compose
 - OpenAI API key
 - Jina API key (for reranking)
