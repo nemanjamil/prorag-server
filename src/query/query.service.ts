@@ -229,6 +229,8 @@ export class QueryService implements OnModuleInit {
         rerankerTopN: settings.rerankerTopN,
         llmModel: settings.llmModel,
         promptTemplateId: settings.promptTemplateId,
+        transformationMs,
+        transformedQueries: transformation.searchQueries,
         queryEmbeddingMs: embeddingMs,
         retrievalMs,
         rerankingMs,
@@ -404,5 +406,33 @@ export class QueryService implements OnModuleInit {
       rerankerScore: null,
       source: 'bm25' as const,
     }));
+  }
+
+  async listQueryLogs(page: number, limit: number) {
+    const [data, total] = await this.queryLogRepo.findAndCount({
+      select: [
+        'id',
+        'queryText',
+        'queryStrategy',
+        'searchMode',
+        'rerankerEnabled',
+        'llmModel',
+        'totalMs',
+        'estimatedCostUsd',
+        'createdAt',
+      ],
+      order: { createdAt: 'DESC' },
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+    return { data, total, page, limit };
+  }
+
+  async getQueryLog(id: number) {
+    const log = await this.queryLogRepo.findOne({ where: { id } });
+    if (!log) {
+      throw new NotFoundException(`Query log with ID ${id} not found`);
+    }
+    return log;
   }
 }

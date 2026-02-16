@@ -47,6 +47,12 @@ export class QueryLog {
   @Column({ name: 'prompt_template_id', type: 'int', nullable: true })
   promptTemplateId: number | null;
 
+  @Column({ name: 'transformation_ms', type: 'int', nullable: true })
+  transformationMs: number | null;
+
+  @Column({ name: 'transformed_queries', type: 'json', nullable: true })
+  transformedQueries: string[] | null;
+
   @Column({ name: 'query_embedding_ms', type: 'int', nullable: true })
   queryEmbeddingMs: number | null;
 
