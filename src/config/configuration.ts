@@ -18,6 +18,7 @@ export default () => ({
     apiKey: process.env.OPENAI_API_KEY || '',
     embeddingModel: process.env.EMBEDDING_MODEL || 'text-embedding-3-large',
     llmModel: process.env.LLM_MODEL || 'gpt-4o',
+    evalModel: process.env.EVAL_MODEL || 'gpt-4o-mini',
   },
 
   jina: {

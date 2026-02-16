@@ -13,6 +13,7 @@ import { GenerationModule } from './generation/generation.module.js';
 import { QueryModule } from './query/query.module.js';
 import { PromptTemplatesModule } from './prompt-templates/prompt-templates.module.js';
 import { ExperimentsModule } from './experiments/experiments.module.js';
+import { EvaluationModule } from './evaluation/evaluation.module.js';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { ExperimentsModule } from './experiments/experiments.module.js';
     QueryModule,
     PromptTemplatesModule,
     ExperimentsModule,
+    EvaluationModule,
   ],
 })
 export class AppModule {}
