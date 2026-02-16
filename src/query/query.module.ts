@@ -8,8 +8,10 @@ import { Bm25Module } from '../bm25/bm25.module.js';
 import { RerankerModule } from '../reranker/reranker.module.js';
 import { GenerationModule } from '../generation/generation.module.js';
 import { QueryController } from './query.controller.js';
+import { AnalyticsController } from './analytics.controller.js';
 import { QueryService } from './query.service.js';
 import { QueryTransformationService } from './query-transformation.service.js';
+import { AnalyticsService } from './analytics.service.js';
 
 @Module({
   imports: [
@@ -20,8 +22,8 @@ import { QueryTransformationService } from './query-transformation.service.js';
     RerankerModule,
     GenerationModule,
   ],
-  controllers: [QueryController],
-  providers: [QueryService, QueryTransformationService],
+  controllers: [QueryController, AnalyticsController],
+  providers: [QueryService, QueryTransformationService, AnalyticsService],
   exports: [QueryService],
 })
 export class QueryModule {}
