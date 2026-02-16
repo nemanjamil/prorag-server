@@ -142,6 +142,38 @@ export class DocumentsService {
     );
   }
 
+  async previewChunks(
+    id: number,
+    strategy: ChunkStrategy,
+    chunkSize: number,
+    chunkOverlap: number,
+  ) {
+    const doc = await this.findOne(id);
+
+    if (doc.status !== DocumentStatus.READY) {
+      throw new BadRequestException(
+        `Document #${id} is not ready (status: ${doc.status})`,
+      );
+    }
+
+    const pages = await this.parsePdf(doc.storagePath);
+    const chunks = this.chunkingService.chunk(pages, strategy, chunkSize, chunkOverlap);
+
+    const lengths = chunks.map((c) => c.text.length);
+    const totalChars = lengths.reduce((a, b) => a + b, 0);
+
+    return {
+      chunks,
+      stats: {
+        count: chunks.length,
+        avgLength: chunks.length ? Math.round(totalChars / chunks.length) : 0,
+        minLength: chunks.length ? Math.min(...lengths) : 0,
+        maxLength: chunks.length ? Math.max(...lengths) : 0,
+        totalChars,
+      },
+    };
+  }
+
   async rechunk(
     id: number,
     strategy: ChunkStrategy,
